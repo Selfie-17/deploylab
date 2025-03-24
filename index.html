@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignLab - Creative Showcase</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #d32f2f;
+            --accent-color: #ffd700;
+            --dark-color: #121212;
+            --light-color: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(26, 35, 126, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color) 50%, var(--secondary-color) 50%, var(--secondary-color) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            padding: 8rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+        }
+
+        .btn-custom {
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            border: none;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .diagonal-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--dark-color);
+            clip-path: polygon(0 100%, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .social-icons {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .social-icons a {
+            color: var(--light-color);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        .page-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--light-color);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--accent-color);
+            transform: scale(1.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .social-icons, .page-dots {
+                display: none;
+            }
+        }
+
+        /* Add styles for Graphic Design section */
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 1.5rem;
+            grid-auto-flow: dense;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .masonry-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .design-carousel .carousel-item {
+            height: 400px;
+        }
+
+        .design-carousel .carousel-item img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            background: var(--dark-color);
+            color: var(--light-color);
+            border: 2px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-color);
+            color: var(--dark-color);
+        }
+
+        /* Additional styles for Tools section */
+        .color-swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: var(--light-color);
+            background-color: var(--primary-color);
+        }
+
+        .accordion-button::after {
+            filter: invert(1);
+        }
+
+        /* Fix for form controls in dark mode */
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Improve button accessibility */
+        .navbar-toggler {
+            padding: 0.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Fix carousel controls accessibility */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            opacity: 1;
+        }
+
+        /* Improve modal close button visibility */
+        .btn-close-white {
+            filter: brightness(0) invert(1);
+        }
+
+        /* Add focus styles for better accessibility */
+        .btn:focus,
+        .nav-link:focus,
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+            outline: none;
+        }
+
+        /* Add smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" aria-label="DesignLab Home">
+                <i class="fas fa-palette me-2" aria-hidden="true"></i>DesignLab
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#typography">Typography</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#showcase">Showcase</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="hero-title">Creative Design Solutions</h1>
+                    <p class="hero-subtitle">Explore the world of typography, scripts, and graphic design</p>
+                    <a href="#showcase" class="btn btn-custom btn-primary-custom">
+                        Get Started
+                        <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <!-- Add hero image or animation here -->
+                </div>
+            </div>
+        </div>
+        <div class="diagonal-divider"></div>
+    </section>
+
+    <!-- Social Icons -->
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-behance"></i></a>
+        <a href="#"><i class="fab fa-dribbble"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <!-- Page Dots -->
+    <div class="page-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <!-- Typography Section -->
+    <section id="typography" class="py-5">
+        <div class="container" data-aos="fade-up">
+            <h2 class="text-center mb-5">Typography Showcase</h2>
+            
+            <!-- Font Categories Tabs -->
+            <ul class="nav nav-pills mb-4 justify-content-center" id="fontTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#serif" type="button">Serif</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#sans-serif" type="button">Sans Serif</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#display" type="button">Display</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#handwriting" type="button">Handwriting</button>
+                </li>
+            </ul>
+
+            <!-- Font Showcase Content -->
+            <div class="tab-content" id="fontTabsContent" role="tabpanel">
+                <!-- Serif Fonts -->
+                <div class="tab-pane fade show active" id="serif">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card bg-dark text-light">
+                                <div class="card-body">
+                                    <h3 class="card-title" style="font-family: 'Playfair Display', serif;">Playfair Display</h3>
+                                    <p class="card-text" style="font-family: 'Playfair Display', serif;">
+                                        The quick brown fox jumps over the lazy dog.
+                                        <br>
+                                        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                                        <br>
+                                        1234567890
+                                    </p>
+                                    <div class="font-weights">
+                                        <span class="fw-light">Light</span>
+                                        <span class="fw-normal">Regular</span>
+                                        <span class="fw-bold">Bold</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-dark text-light">
+                                <div class="card-body">
+                                    <h3 class="card-title" style="font-family: 'Merriweather', serif;">Merriweather</h3>
+                                    <p class="card-text" style="font-family: 'Merriweather', serif;">
+                                        The quick brown fox jumps over the lazy dog.
+                                        <br>
+                                        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                                        <br>
+                                        1234567890
+                                    </p>
+                                    <div class="font-weights">
+                                        <span class="fw-light">Light</span>
+                                        <span class="fw-normal">Regular</span>
+                                        <span class="fw-bold">Bold</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sans Serif Fonts -->
+                <div class="tab-pane fade" id="sans-serif">
+                    <!-- Similar structure as serif section -->
+                </div>
+
+                <!-- Display Fonts -->
+                <div class="tab-pane fade" id="display">
+                    <!-- Similar structure as serif section -->
+                </div>
+
+                <!-- Handwriting Fonts -->
+                <div class="tab-pane fade" id="handwriting">
+                    <!-- Similar structure as serif section -->
+                </div>
+            </div>
+
+            <!-- Interactive Font Playground -->
+            <div class="font-playground mt-5 p-4 bg-dark rounded" data-aos="fade-up">
+                <h3 class="text-center mb-4">Font Playground</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="fontSelect" class="form-label">Select Font</label>
+                            <select class="form-select" id="fontSelect">
+                                <option value="'Playfair Display', serif">Playfair Display</option>
+                                <option value="'Merriweather', serif">Merriweather</option>
+                                <option value="'Montserrat', sans-serif">Montserrat</option>
+                                <option value="'Poppins', sans-serif">Poppins</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fontSize" class="form-label">Font Size: <span id="fontSizeValue">16</span>px</label>
+                            <input type="range" class="form-range" id="fontSize" min="12" max="72" value="16">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fontWeight" class="form-label">Font Weight</label>
+                            <select class="form-select" id="fontWeight">
+                                <option value="300">Light</option>
+                                <option value="400">Regular</option>
+                                <option value="600">Semi Bold</option>
+                                <option value="700">Bold</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="preview-box p-3 bg-light text-dark rounded">
+                            <p id="previewText" contenteditable="true">
+                                Type or paste your text here to preview the selected font...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Graphic Design Showcase -->
+    <section id="showcase" class="py-5 bg-dark">
+        <div class="container" data-aos="fade-up">
+            <h2 class="text-center mb-5">Design Showcase</h2>
+
+            <!-- Featured Projects Carousel -->
+            <div id="designCarousel" class="carousel slide design-carousel mb-5" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#designCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#designCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#designCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://source.unsplash.com/random/1200x400/?graphic-design" class="d-block w-100" alt="Graphic Design Project 1">
+                        <div class="carousel-caption">
+                            <h3>Brand Identity Design</h3>
+                            <p>Modern and minimalist approach to branding</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://source.unsplash.com/random/1200x400/?typography" class="d-block w-100" alt="Graphic Design Project 2">
+                        <div class="carousel-caption">
+                            <h3>Typography Exploration</h3>
+                            <p>Experimental typography and layout design</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://source.unsplash.com/random/1200x400/?web-design" class="d-block w-100" alt="Graphic Design Project 3">
+                        <div class="carousel-caption">
+                            <h3>Web Design</h3>
+                            <p>Modern web interfaces and user experience</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#designCarousel" data-bs-slide="prev" aria-label="Previous slide">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#designCarousel" data-bs-slide="next" aria-label="Next slide">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="category-filter justify-content-center">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="branding">Branding</button>
+                <button class="filter-btn" data-filter="typography">Typography</button>
+                <button class="filter-btn" data-filter="web">Web Design</button>
+                <button class="filter-btn" data-filter="illustration">Illustration</button>
+            </div>
+
+            <!-- Masonry Grid -->
+            <div class="masonry-grid">
+                <div class="masonry-item" data-category="branding">
+                    <img src="https://source.unsplash.com/random/600x400/?branding" alt="Branding Project">
+                    <div class="p-3 bg-dark">
+                        <h5>Brand Identity</h5>
+                        <p class="mb-0">Modern logo design and brand guidelines</p>
+                    </div>
+                </div>
+                <div class="masonry-item" data-category="typography">
+                    <img src="https://source.unsplash.com/random/600x600/?typography" alt="Typography Project">
+                    <div class="p-3 bg-dark">
+                        <h5>Custom Typography</h5>
+                        <p class="mb-0">Hand-crafted letterforms and type design</p>
+                    </div>
+                </div>
+                <div class="masonry-item" data-category="web">
+                    <img src="https://source.unsplash.com/random/600x500/?web-design" alt="Web Design Project">
+                    <div class="p-3 bg-dark">
+                        <h5>Web Interface</h5>
+                        <p class="mb-0">Responsive and intuitive web design</p>
+                    </div>
+                </div>
+                <div class="masonry-item" data-category="illustration">
+                    <img src="https://source.unsplash.com/random/600x700/?illustration" alt="Illustration Project">
+                    <div class="p-3 bg-dark">
+                        <h5>Digital Illustration</h5>
+                        <p class="mb-0">Creative digital artwork and illustrations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Resources Section -->
+    <section id="tools" class="py-5">
+        <div class="container" data-aos="fade-up">
+            <h2 class="text-center mb-5">Tools & Resources</h2>
+
+            <!-- Resource Categories -->
+            <div class="row g-4">
+                <!-- Design Tools -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card bg-dark text-light h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <i class="fas fa-pencil-ruler me-2"></i>
+                                Design Tools
+                            </h3>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <button class="btn btn-outline-light w-100 text-start" data-bs-toggle="modal" data-bs-target="#figmaModal">
+                                        <i class="fab fa-figma me-2"></i>
+                                        Figma
+                                    </button>
+                                </li>
+                                <li class="mb-3">
+                                    <button class="btn btn-outline-light w-100 text-start" data-bs-toggle="modal" data-bs-target="#adobeModal">
+                                        <i class="fab fa-adobe me-2"></i>
+                                        Adobe Creative Suite
+                                    </button>
+                                </li>
+                                <li class="mb-3">
+                                    <button class="btn btn-outline-light w-100 text-start" data-bs-toggle="modal" data-bs-target="#sketchModal">
+                                        <i class="fas fa-pen-nib me-2"></i>
+                                        Sketch
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typography Resources -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card bg-dark text-light h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <i class="fas fa-font me-2"></i>
+                                Typography
+                            </h3>
+                            <div class="accordion" id="typographyAccordion">
+                                <div class="accordion-item bg-dark">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#fontPairings">
+                                            Font Pairings
+                                        </button>
+                                    </h2>
+                                    <div id="fontPairings" class="accordion-collapse collapse show" data-bs-parent="#typographyAccordion">
+                                        <div class="accordion-body">
+                                            <ul class="list-unstyled">
+                                                <li>Montserrat + Merriweather</li>
+                                                <li>Poppins + Playfair Display</li>
+                                                <li>Roboto + Lora</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item bg-dark">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#fontResources">
+                                            Font Resources
+                                        </button>
+                                    </h2>
+                                    <div id="fontResources" class="accordion-collapse collapse" data-bs-parent="#typographyAccordion">
+                                        <div class="accordion-body">
+                                            <ul class="list-unstyled">
+                                                <li><a href="#" class="text-light">Google Fonts</a></li>
+                                                <li><a href="#" class="text-light">Adobe Fonts</a></li>
+                                                <li><a href="#" class="text-light">Font Squirrel</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color Tools -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card bg-dark text-light h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <i class="fas fa-palette me-2"></i>
+                                Color Tools
+                            </h3>
+                            <div class="color-palette mb-4">
+                                <div class="d-flex flex-wrap gap-2">
+                                    <div class="color-swatch" style="background-color: var(--primary-color)"></div>
+                                    <div class="color-swatch" style="background-color: var(--secondary-color)"></div>
+                                    <div class="color-swatch" style="background-color: var(--accent-color)"></div>
+                                </div>
+                            </div>
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Click on any color to copy its hex code!
+                            </div>
+                            <button class="btn btn-outline-light w-100 mt-3" data-bs-toggle="modal" data-bs-target="#colorPickerModal">
+                                <i class="fas fa-eye-dropper me-2"></i>
+                                Open Color Picker
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-dark">
+        <div class="container" data-aos="fade-up">
+            <h2 class="text-center mb-5">Get in Touch</h2>
+
+            <div class="row g-4">
+                <!-- Contact Form -->
+                <div class="col-lg-8">
+                    <div class="card bg-dark text-light border-light">
+                        <div class="card-body">
+                            <form id="contactForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control bg-dark text-light" id="name" placeholder="Your Name" required>
+                                            <label for="name" class="text-light">Your Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control bg-dark text-light" id="email" placeholder="Your Email" required>
+                                            <label for="email" class="text-light">Your Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control bg-dark text-light" id="subject" placeholder="Subject" required>
+                                            <label for="subject" class="text-light">Subject</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control bg-dark text-light" id="message" placeholder="Your Message" style="height: 150px" required></textarea>
+                                            <label for="message" class="text-light">Your Message</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                                            <i class="fas fa-paper-plane me-2"></i>
+                                            Send Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-4">
+                    <div class="card bg-dark text-light border-light h-100">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4">Contact Information</h3>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-map-marker-alt fa-2x me-3 text-primary"></i>
+                                <div>
+                                    <h4 class="h6 mb-1">Address</h4>
+                                    <p class="mb-0">123 Design Street, Creative City, 12345</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-envelope fa-2x me-3 text-primary"></i>
+                                <div>
+                                    <h4 class="h6 mb-1">Email</h4>
+                                    <a href="mailto:contact@designlab.com" class="text-light text-decoration-none">contact@designlab.com</a>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-4">
+                                <i class="fas fa-phone fa-2x me-3 text-primary"></i>
+                                <div>
+                                    <h4 class="h6 mb-1">Phone</h4>
+                                    <a href="tel:+1234567890" class="text-light text-decoration-none">+1 (234) 567-890</a>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <h4 class="h5 mb-3">Follow Us</h4>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="btn btn-outline-light btn-lg rounded-circle" aria-label="Visit our Facebook page" rel="noopener noreferrer">
+                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-light btn-lg rounded-circle" aria-label="Follow us on Twitter" rel="noopener noreferrer">
+                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-light btn-lg rounded-circle" aria-label="Follow us on Instagram" rel="noopener noreferrer">
+                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-light btn-lg rounded-circle" aria-label="Connect with us on LinkedIn" rel="noopener noreferrer">
+                                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark text-light border-top">
+        <div class="container text-center">
+            <p class="mb-0">&copy; <span id="currentYear">2024</span> DesignLab. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal fade" id="figmaModal" tabindex="-1" aria-labelledby="figmaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="figmaModalLabel">Figma</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Figma is a collaborative interface design tool that's taking the design world by storm.</p>
+                    <ul>
+                        <li>Real-time collaboration</li>
+                        <li>Powerful prototyping</li>
+                        <li>Design systems support</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="https://www.figma.com" target="_blank" class="btn btn-primary">Visit Figma</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Color Picker Modal -->
+    <div class="modal fade" id="colorPickerModal" tabindex="-1" aria-labelledby="colorPickerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="colorPickerModalLabel">Color Picker</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="colorPicker" class="form-label">Pick a color:</label>
+                        <input type="color" class="form-control form-control-color w-100" id="colorPicker" value="#563d7c">
+                    </div>
+                    <div class="mb-3">
+                        <label for="colorCode" class="form-label">Color code:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="colorCode" value="#563d7c" readonly>
+                            <button class="btn btn-outline-light" type="button" id="copyColorCode">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Font Playground Functionality
+        const fontSelect = document.getElementById('fontSelect');
+        const fontSize = document.getElementById('fontSize');
+        const fontWeight = document.getElementById('fontWeight');
+        const previewText = document.getElementById('previewText');
+        const fontSizeValue = document.getElementById('fontSizeValue');
+
+        function updatePreview() {
+            previewText.style.fontFamily = fontSelect.value;
+            previewText.style.fontSize = `${fontSize.value}px`;
+            previewText.style.fontWeight = fontWeight.value;
+            fontSizeValue.textContent = fontSize.value;
+        }
+
+        fontSelect.addEventListener('change', updatePreview);
+        fontSize.addEventListener('input', updatePreview);
+        fontWeight.addEventListener('change', updatePreview);
+
+        // Masonry Filter Functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const masonryItems = document.querySelectorAll('.masonry-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Filter items
+                masonryItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Color picker functionality
+        const colorPicker = document.getElementById('colorPicker');
+        const colorCode = document.getElementById('colorCode');
+        const copyColorCode = document.getElementById('copyColorCode');
+
+        colorPicker.addEventListener('input', (e) => {
+            const color = e.target.value;
+            colorCode.value = color;
+        });
+
+        copyColorCode.addEventListener('click', () => {
+            colorCode.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            copyColorCode.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                copyColorCode.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 1500);
+        });
+
+        // Color swatch click to copy
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                const color = getComputedStyle(swatch).backgroundColor;
+                const tempInput = document.createElement('input');
+                document.body.appendChild(tempInput);
+                tempInput.value = color;
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+
+                // Show feedback
+                const tooltip = document.createElement('div');
+                tooltip.className = 'position-absolute bg-dark text-light p-2 rounded';
+                tooltip.style.zIndex = '1000';
+                tooltip.textContent = 'Color copied!';
+                swatch.appendChild(tooltip);
+                setTimeout(() => tooltip.remove(), 1500);
+            });
+        });
+
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message with ARIA live region
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-success mt-3';
+            alert.setAttribute('role', 'alert');
+            alert.setAttribute('aria-live', 'polite');
+            alert.innerHTML = `
+                <i class="fas fa-check-circle me-2" aria-hidden="true"></i>
+                Thank you for your message! We'll get back to you soon.
+            `;
+            this.appendChild(alert);
+
+            // Reset form
+            this.reset();
+
+            // Remove alert after 5 seconds
+            setTimeout(() => alert.remove(), 5000);
+        });
+
+        // Update copyright year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Update active dot on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const dots = document.querySelectorAll('.dot');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.dataset.section === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
